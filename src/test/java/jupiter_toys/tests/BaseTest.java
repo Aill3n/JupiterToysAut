@@ -11,32 +11,11 @@ import org.openqa.selenium.safari.SafariDriver;
 import java.time.Duration;
 import java.util.logging.Logger;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-/*
-Solution setup
-Package/namespace/folder structure
-BaseTest creation
-WebDriver creation
-Test case design
-Coding with intent
-Model pages
-BasePage to place common code to all pages
-Dependency injection for the driver
-Selenium API:
-Locator strategies for present elements
-Click
-Type text
-Get text */
 public class BaseTest {
 
-    protected String username = "anyvaluewilldo";
-    protected String password = "letmein";
-    protected String trustStorePassword = "seleniumkeystore";
     protected WebDriver driver;
     private static final Logger logger = Logger.getLogger(BaseTest.class.getName());
     protected String baseUrl = System.getProperty("base.url", "https://jupiter.cloud.planittesting.com/#/home");
-
 
     @BeforeEach
     public void testSetUp() {

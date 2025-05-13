@@ -1,42 +1,40 @@
 package jupiter_toys.tests;
 
+import jupiter_toys.pages.ContactPage;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ContactPageTest extends BaseTest {
-
     private static final Logger logger = Logger.getLogger(ContactPageTest.class.getName());
 
     @Test
-    public void enterInvalidEmailForContactMenuTest() {
-
-        WebElement contactMenu = driver.findElement(By.className("icon-envelope"));
-        contactMenu.click();
-        logger.info("Clicked on Contact menu.");
-
-        // Add a wait here until the page is loaded?
-        WebElement emailField = driver.findElement(By.id("email"));
-
-        // Enter incorrect email
+    public void enterInvalidEmailTest() {
+        // Test data
         String invalidEmailText = "thisisnotavalidemail";
-        emailField.sendKeys(invalidEmailText);
-
-        //Validate error message is displayed
-        WebElement errorValidation = driver.findElement(By.id("email-err"));
-        String invalidEmailErrorTextFound = errorValidation.getText();
-        logger.info("Invalid email entered: " + invalidEmailText);
-
-        //Should I use a soft assertion here, so test doesn't stop upon failure?
         String expectedInvalidEmailText = "Please enter a valid email";
-        assertEquals(expectedInvalidEmailText,invalidEmailErrorTextFound, "Invalid email error message not displayed");
-        logger.info("Validation of invalid email passed.");
 
-        logger.info("Test passed.");
+        logger.info("Test starting: Enter invalid contact email address");
+
+        ContactPage contactPage = new ContactPage(driver);
+
+
+        // Step 1: From the home page go to the contact page
+        contactPage.openContactPage();
+        logger.info("Navigated to the Contact page.");
+
+        // Step 2: Populate the email field with thisisnotavalidemail
+        contactPage.enterEmail(invalidEmailText);
+        logger.info("Entered invalid email: " + invalidEmailText);
+
+        // Step 3: Verify that the email error is displayed with text:
+        // Please enter a valid email
+        String actualErrorMessage = contactPage.getEmailErrorMessage();
+        assertEquals(expectedInvalidEmailText, actualErrorMessage, "Error message displayed when email is invalid");
+
+        logger.info("Test passed: Enter invalid contact email address");
     }
 }
 

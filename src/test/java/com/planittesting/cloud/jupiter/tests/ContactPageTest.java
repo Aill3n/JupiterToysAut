@@ -35,7 +35,7 @@ public class ContactPageTest extends BaseTest {
     }
 
     @Test
-    public void submitFormWithEmptyFieldsTest(){
+    public void submitFormWithEmptyFieldsTest() {
         String expectedForenameRequiredMessage = "Forename is required";
         String expectedEmailRequiredMessage = "Email is required";
         String expectedMessageRequiredMessage = "Message is required";
@@ -58,13 +58,14 @@ public class ContactPageTest extends BaseTest {
 
         // Step 3: Validate that the mandatory errors for missing fields shows field 'is required' message
         String actualForenameErrorMessage = contactPage.getForenameErrorMessage();
-        assertEquals(expectedForenameRequiredMessage, actualForenameErrorMessage, "Error message displayed when Forename is empty");
-
         String actualEmailErrorMessage = contactPage.getEmailErrorMessage();
-        assertEquals(expectedEmailRequiredMessage, actualEmailErrorMessage, "Error message displayed when Email is empty");
-
         String actualMessageErrorMessage = contactPage.getMessageErrorMessage();
-        assertEquals(expectedMessageRequiredMessage, actualMessageErrorMessage, "Error message displayed when Message is empty");
+
+        assertAll("Validation of messages displayed for required fields",
+                () -> assertEquals(expectedForenameRequiredMessage, actualForenameErrorMessage, "Error message displayed when Forename is empty"),
+                () -> assertEquals(expectedEmailRequiredMessage, actualEmailErrorMessage, "Error message displayed when Email is empty"),
+                () -> assertEquals(expectedMessageRequiredMessage, actualMessageErrorMessage, "Error message displayed when Message is empty")
+        );
 
         // Step 4: Populate mandatory fields
         contactPage.populateMandatoryFields(validEmail, validForename, validMessage);

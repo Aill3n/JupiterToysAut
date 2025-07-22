@@ -1,6 +1,7 @@
 package com.planittesting.cloud.jupiter.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -40,8 +41,12 @@ public class ContactPage extends BasePage {
     }
 
     public String getEmailErrorMessage() {
-        WebElement errorValidation = driver.findElement(emailErrorLocator);
-        return errorValidation.getText();
+        try {
+            WebElement errorValidation = driver.findElement(emailErrorLocator);
+            return errorValidation.getText();
+        } catch (NoSuchElementException e) {
+            return "";
+        }
     }
 
     public void submitForm() {
@@ -56,13 +61,21 @@ public class ContactPage extends BasePage {
     }
 
     public String getForenameErrorMessage() {
-        WebElement forenameValidation = driver.findElement(forenameErrorLocator);
-        return forenameValidation.getText();
+        try {
+            WebElement forenameValidation = driver.findElement(forenameErrorLocator);
+            return forenameValidation.getText();
+        } catch (NoSuchElementException e) {
+            return "";
+        }
     }
 
     public String getMessageErrorMessage() {
-        WebElement messageValidation = driver.findElement(messageErrorLocator);
-        return messageValidation.getText();
+        try {
+            WebElement messageValidation = driver.findElement(messageErrorLocator);
+            return messageValidation.getText();
+        } catch (NoSuchElementException e) {
+            return "";
+        }
     }
 
     public void enterMessage(String message) {

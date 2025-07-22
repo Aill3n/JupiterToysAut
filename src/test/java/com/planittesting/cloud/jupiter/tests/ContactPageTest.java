@@ -5,7 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.logging.Logger;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class ContactPageTest extends BaseTest {
     private static final Logger logger = Logger.getLogger(ContactPageTest.class.getName());
@@ -14,8 +15,6 @@ public class ContactPageTest extends BaseTest {
     public void enterInvalidEmailTest() {
         String invalidEmailText = "thisisnotavalidemail";
         String expectedInvalidEmailText = "Please enter a valid email";
-
-        logger.info("Test Case 1 starting: Enter invalid contact email address");
 
         ContactPage contactPage = new ContactPage(driver);
 
@@ -31,7 +30,6 @@ public class ContactPageTest extends BaseTest {
         String actualErrorMessage = contactPage.getEmailErrorMessage();
         assertEquals(expectedInvalidEmailText, actualErrorMessage, "Error message displayed when email is invalid");
 
-        logger.info("Test Case 1 passed: Enter invalid contact email address");
     }
 
     @Test
@@ -43,8 +41,6 @@ public class ContactPageTest extends BaseTest {
         String validEmail = "test@planittesting.com";
         String validForename = "Test";
         String validMessage = "Our test bears won’t let a single bug through the toy aisle.";
-
-        logger.info("Test Case 2 starting: Submit contact form with empty fields");
 
         ContactPage contactPage = new ContactPage(driver);
 
@@ -74,7 +70,6 @@ public class ContactPageTest extends BaseTest {
         // Step 5: Validate that the mandatory errors are no longer displayed
         contactPage.waitUntilRequiredMessagesNotVisible();
         logger.info("Error messages for required fields are no longer shown.");
-        logger.info("Test Case 2 passed: Submit form with empty fields");
     }
 }
 

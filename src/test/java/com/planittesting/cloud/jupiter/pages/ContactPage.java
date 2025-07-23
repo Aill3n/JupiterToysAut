@@ -1,10 +1,11 @@
 package com.planittesting.cloud.jupiter.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
 
 public class ContactPage extends BasePage {
 
@@ -41,12 +42,8 @@ public class ContactPage extends BasePage {
     }
 
     public String getEmailErrorMessage() {
-        try {
-            WebElement errorValidation = driver.findElement(emailErrorLocator);
-            return errorValidation.getText();
-        } catch (NoSuchElementException e) {
-            return "";
-        }
+        List<WebElement> elements = driver.findElements(emailErrorLocator);
+        return !elements.isEmpty() ? elements.getFirst().getText() : "";
     }
 
     public void submitForm() {
@@ -61,21 +58,13 @@ public class ContactPage extends BasePage {
     }
 
     public String getForenameErrorMessage() {
-        try {
-            WebElement forenameValidation = driver.findElement(forenameErrorLocator);
-            return forenameValidation.getText();
-        } catch (NoSuchElementException e) {
-            return "";
-        }
+        List<WebElement> elements = driver.findElements(forenameErrorLocator);
+        return !elements.isEmpty() ? elements.getFirst().getText() : "";
     }
 
     public String getMessageErrorMessage() {
-        try {
-            WebElement messageValidation = driver.findElement(messageErrorLocator);
-            return messageValidation.getText();
-        } catch (NoSuchElementException e) {
-            return "";
-        }
+        List<WebElement> elements = driver.findElements(messageErrorLocator);
+        return !elements.isEmpty() ? elements.getFirst().getText() : "";
     }
 
     public void enterMessage(String message) {

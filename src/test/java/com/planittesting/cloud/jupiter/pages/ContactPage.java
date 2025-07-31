@@ -25,6 +25,10 @@ public class ContactPage extends BasePage {
     private final By emailErrorLocator = By.id("email-err");
     private final By messageErrorLocator = By.id("message-err");
 
+    // Submission message
+    private final By loadingModalLocator = By.className("modal-header");
+    private final By submissionTextLocator = By.className("alert-success");
+
     public ContactPage(WebDriver driver) {
         super(driver);
     }
@@ -83,5 +87,11 @@ public class ContactPage extends BasePage {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(forenameErrorLocator));
         wait.until(ExpectedConditions.invisibilityOfElementLocated(emailErrorLocator));
         wait.until(ExpectedConditions.invisibilityOfElementLocated(messageErrorLocator));
+    }
+
+    public String getSubmissionText() {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(loadingModalLocator));
+        List<WebElement> elements = driver.findElements(submissionTextLocator);
+        return !elements.isEmpty() ? elements.getFirst().getText().trim() : "";
     }
 }

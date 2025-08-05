@@ -3,14 +3,10 @@ package com.planittesting.cloud.jupiter.tests;
 import com.planittesting.cloud.jupiter.pages.ContactPage;
 import org.junit.jupiter.api.Test;
 
-import java.util.logging.Logger;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class ContactPageTest extends BaseTest {
-
-    private static final Logger logger = Logger.getLogger(ContactPageTest.class.getName());
 
     // Expected fields validation messages
     private static final String EXPECTED_FORENAME_REQUIRED_MESSAGE = "Forename is required";
@@ -33,11 +29,9 @@ public class ContactPageTest extends BaseTest {
 
         // Step 1: From the home page go to the contact page
         contactPage.openContactPage();
-        logger.info("Navigated to the Contact page.");
 
         // Step 2: Populate the email field with thisisnotavalidemail
         contactPage.enterEmail(INVALID_EMAIL_TEXT);
-        logger.info("Entered invalid email: " + INVALID_EMAIL_TEXT);
 
         // Step 3: Verify that the email error is displayed with text:
         String actualErrorMessage = contactPage.getEmailErrorMessage();
@@ -52,11 +46,9 @@ public class ContactPageTest extends BaseTest {
 
         // Step 1: From the home page go to the contact page
         contactPage.openContactPage();
-        logger.info("Navigated to the Contact page.");
 
         // Step 2: Click on the Submit button
         contactPage.submitForm();
-        logger.info("Clicked the Submit button with empty mandatory fields.");
 
         // Step 3: Validate that the mandatory errors for missing fields shows field 'is required' message
         String actualForenameErrorMessage = contactPage.getForenameErrorMessage();
@@ -71,11 +63,9 @@ public class ContactPageTest extends BaseTest {
 
         // Step 4: Populate mandatory fields
         contactPage.populateMandatoryFields(VALID_EMAIL, VALID_FORENAME, VALID_MESSAGE);
-        logger.info("Populated mandatory fields.");
 
         // Step 5: Validate that the mandatory errors are no longer displayed
         contactPage.waitUntilRequiredMessagesNotVisible();
-        logger.info("Error messages for required fields are no longer shown.");
     }
 
     @Test
@@ -87,14 +77,12 @@ public class ContactPageTest extends BaseTest {
 
         // Step 1: From the home page go to the contact page
         contactPage.openContactPage();
-        logger.info("Navigated to the Contact page.");
 
         // Step 2: Populate the mandatory fields
         contactPage.populateMandatoryFields(VALID_EMAIL, VALID_FORENAME, VALID_MESSAGE);
 
         // Step 3: Click on the Submit button
         contactPage.submitForm();
-        logger.info("Clicked the Submit button with mandatory fields populated.");
 
         // Step 4: Verify Thanks message text
         String actualThanksMessage = contactPage.getSubmissionText();

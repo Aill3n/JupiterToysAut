@@ -6,7 +6,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.function.Supplier;
-import java.util.logging.Logger;
 
 /**
  * This is for selecting which browser to use
@@ -18,8 +17,6 @@ public enum Browser {
     FIREFOX(FirefoxDriver::new),
     EDGE(EdgeDriver::new);
 
-    private static final Logger logger = Logger.getLogger(Browser.class.getName());
-
     private final Supplier<WebDriver> driver;
 
     Browser(Supplier<WebDriver> driver) {
@@ -27,7 +24,6 @@ public enum Browser {
     }
 
     public WebDriver driver() {
-        logger.info("Selecting " + this.name().toLowerCase() + " browser.");
         return driver.get();
     }
 }

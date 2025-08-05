@@ -16,8 +16,8 @@ public class LoginPage extends BasePage {
     private final By loginMenuLocator = By.id("nav-login");
     private final By userNameLoginLocator = By.id("loginUserName");
     private final By passwordLoginLocator = By.id("loginPassword");
-    private final By buttonLogin = By.className("btn-primary");
-    private final By userLoggedInLocator = By.className("user");
+    private final By loginButtonLocator = By.className("btn-primary");
+    private final By loggedInUserLocator = By.className("user");
 
     public void openLoginWindow() {
         WebElement loginMenu = driver.findElement(loginMenuLocator);
@@ -36,12 +36,13 @@ public class LoginPage extends BasePage {
     }
 
     public void submitLoginForm() {
-        WebElement loginButton = driver.findElement(buttonLogin);
+        WebElement loginButton = driver.findElement(loginButtonLocator);
         loginButton.click();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(loginMenuLocator));
     }
 
     public String getUsernameLoggedIn() {
-        List<WebElement> elements = driver.findElements(userLoggedInLocator);
+        List<WebElement> elements = driver.findElements(loggedInUserLocator);
         return !elements.isEmpty() ? elements.getFirst().getText() : "";
     }
 }

@@ -11,11 +11,11 @@ public class LoginPageTest extends BaseTest {
 
     private static final Logger logger = Logger.getLogger(LoginPageTest.class.getName());
 
-    private static final String userName = "anyvaluewilldo";
-    private static final String password = "letmein";
+    private static final String USERNAME = "anyvaluewilldo";
+    private static final String PASSWORD = "letmein";
 
     @Test
-    public void loginSuccessfullyTest() {
+    public void loginWithValidCredentialsTest() {
 
         LoginPage loginPage = new LoginPage(driver);
 
@@ -24,15 +24,15 @@ public class LoginPageTest extends BaseTest {
         logger.info("Opened the login dialogue.");
 
         // Step 2: Enter username and password
-        loginPage.populateLoginParameters(userName, password);
+        loginPage.populateLoginParameters(USERNAME, PASSWORD);
 
         // Step 3: Click the Login button
         loginPage.submitLoginForm();
         logger.info("User logged in.");
 
-        // Step 4:Verify that the username appears in the menu bar
+        // Step 4: Verify that the username appears in the menu bar
         String actualUser = loginPage.getUsernameLoggedIn();
-        assertEquals(userName, actualUser, "Validating expected user name");
+        assertEquals(USERNAME, actualUser, "Validating expected user name");
     }
 
 }

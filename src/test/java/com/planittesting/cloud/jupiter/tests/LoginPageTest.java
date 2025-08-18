@@ -1,6 +1,5 @@
 package com.planittesting.cloud.jupiter.tests;
 
-import com.planittesting.cloud.jupiter.pages.ContactPage;
 import com.planittesting.cloud.jupiter.pages.LoginPage;
 import org.junit.jupiter.api.Test;
 

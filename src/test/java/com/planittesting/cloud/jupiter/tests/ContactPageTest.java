@@ -24,11 +24,8 @@ public class ContactPageTest extends BaseTest {
 
     @Test
     public void enterInvalidEmailTest() {
-
-        ContactPage contactPage = basePage.openContactPage();
-
         // Step 1: From the home page go to the contact page
-        contactPage.openContactPage();
+        ContactPage contactPage = basePage.openContactPage();
 
         // Step 2: Populate the email field with thisisnotavalidemail
         contactPage.enterEmail(INVALID_EMAIL_TEXT);
@@ -42,10 +39,8 @@ public class ContactPageTest extends BaseTest {
     @Test
     public void submitFormWithEmptyFieldsTest() {
 
-        ContactPage contactPage = basePage.openContactPage();
-
         // Step 1: From the home page go to the contact page
-        contactPage.openContactPage();
+        ContactPage contactPage = basePage.openContactPage();
 
         // Step 2: Click on the Submit button
         contactPage.submitForm();
@@ -70,13 +65,11 @@ public class ContactPageTest extends BaseTest {
 
     @Test
     public void submitValidContactFormTest() {
-
         String expectedThanksMessage = String.format("Thanks %s, we appreciate your feedback.", VALID_FORENAME);
 
+        // Step 1: From the home page go to the contact page
         ContactPage contactPage = basePage.openContactPage();
 
-        // Step 1: From the home page go to the contact page
-        contactPage.openContactPage();
 
         // Step 2: Populate the mandatory fields
         contactPage.populateMandatoryFields(VALID_EMAIL, VALID_FORENAME, VALID_MESSAGE);

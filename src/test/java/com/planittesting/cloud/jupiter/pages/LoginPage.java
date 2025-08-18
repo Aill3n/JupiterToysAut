@@ -22,12 +22,6 @@ public class LoginPage extends BasePage {
     private final By logoutButtonLocator = By.className("btn-success");
     private final By modalFooterLocator = By.className("modal-footer");
 
-    public void openLoginWindow() {
-        WebElement loginMenu = driver.findElement(loginMenuLocator);
-        loginMenu.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(userNameLoginLocator));
-    }
-
     public void populateLoginParameters(String userName, String password) {
         WebElement userNameField = driver.findElement(userNameLoginLocator);
         userNameField.clear();

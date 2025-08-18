@@ -25,7 +25,7 @@ public class ContactPageTest extends BaseTest {
     @Test
     public void enterInvalidEmailTest() {
 
-        ContactPage contactPage = new ContactPage(driver);
+        ContactPage contactPage = basePage.openContactPage();
 
         // Step 1: From the home page go to the contact page
         contactPage.openContactPage();
@@ -42,7 +42,7 @@ public class ContactPageTest extends BaseTest {
     @Test
     public void submitFormWithEmptyFieldsTest() {
 
-        ContactPage contactPage = new ContactPage(driver);
+        ContactPage contactPage = basePage.openContactPage();
 
         // Step 1: From the home page go to the contact page
         contactPage.openContactPage();
@@ -73,7 +73,7 @@ public class ContactPageTest extends BaseTest {
 
         String expectedThanksMessage = String.format("Thanks %s, we appreciate your feedback.", VALID_FORENAME);
 
-        ContactPage contactPage = new ContactPage(driver);
+        ContactPage contactPage = basePage.openContactPage();
 
         // Step 1: From the home page go to the contact page
         contactPage.openContactPage();

@@ -14,11 +14,8 @@ public class LoginPageTest extends BaseTest {
 
     @Test
     public void loginWithValidCredentialsTest() {
-
-        LoginPage loginPage = new LoginPage(driver);
-
         // Step 1: From the home page click the login dialogue
-        loginPage.openLoginWindow();
+        LoginPage loginPage = basePage.openLoginWindow();
 
         // Step 2: Enter username and password
         loginPage.populateLoginParameters(USERNAME, PASSWORD);
@@ -33,15 +30,11 @@ public class LoginPageTest extends BaseTest {
 
     @Test
     public void logoutAfterValidLoginTest() {
-
-        LoginPage loginPage = new LoginPage(driver);
-        ContactPage contactPage = new ContactPage(driver);
-
         // Step 1: From the home page go to the contact page
-        contactPage.openContactPage();
+        basePage.openContactPage();
 
         // Step 2: Click the login button
-        loginPage.openLoginWindow();
+        LoginPage loginPage = basePage.openLoginWindow();
 
         // Step 3: In the login dialog enter username as anyvaluewilldo and password as letmein
         loginPage.populateLoginParameters(USERNAME, PASSWORD);

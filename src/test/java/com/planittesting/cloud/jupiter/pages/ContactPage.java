@@ -9,9 +9,6 @@ import java.util.List;
 
 public class ContactPage extends BasePage {
 
-    // Menu
-    private final By contactMenuLocator = By.className("icon-envelope");
-
     // Buttons
     private final By submitButtonLocator = By.className("btn-contact");
 
@@ -31,12 +28,6 @@ public class ContactPage extends BasePage {
 
     public ContactPage(WebDriver driver) {
         super(driver);
-    }
-
-    public void openContactPage() {
-        WebElement contactMenu = driver.findElement(contactMenuLocator);
-        contactMenu.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(emailFieldLocator));
     }
 
     public void enterEmail(String email) {

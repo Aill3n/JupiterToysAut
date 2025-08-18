@@ -4,6 +4,7 @@ import com.planittesting.cloud.jupiter.pages.LoginPage;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class LoginPageTest extends BaseTest {
 
@@ -12,11 +13,8 @@ public class LoginPageTest extends BaseTest {
 
     @Test
     public void loginWithValidCredentialsTest() {
-
-        LoginPage loginPage = new LoginPage(driver);
-
         // Step 1: From the home page click the login dialogue
-        loginPage.openLoginWindow();
+        LoginPage loginPage = basePage.openLoginWindow();
 
         // Step 2: Enter username and password
         loginPage.populateLoginParameters(USERNAME, PASSWORD);
@@ -29,4 +27,28 @@ public class LoginPageTest extends BaseTest {
         assertEquals(USERNAME, actualUser, "Validating expected user name");
     }
 
+    @Test
+    public void logoutAfterValidLoginTest() {
+        // Step 1: From the home page go to the contact page
+        basePage.openContactPage();
+
+        // Step 2: Click the login button
+        LoginPage loginPage = basePage.openLoginWindow();
+
+        // Step 3: In the login dialog enter username as anyvaluewilldo and password as letmein
+        loginPage.populateLoginParameters(USERNAME, PASSWORD);
+        loginPage.submitLoginForm();
+        String actualUser = loginPage.getUsernameLoggedIn();
+        assertEquals(USERNAME, actualUser, "Validating expected user name");
+
+        // Step 4: Click the logout menu
+        loginPage.openLogoutWindow();
+
+        // Step 5: Click the logout button
+        loginPage.logOut();
+
+        // Step 6: Validate that the username is not displayed
+        String actualValue = loginPage.getUsernameLoggedIn();
+        assertNotEquals(USERNAME, actualValue, "Validating username is no longer displayed.");
+    }
 }

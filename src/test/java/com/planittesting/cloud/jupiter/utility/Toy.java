@@ -1,6 +1,6 @@
 package com.planittesting.cloud.jupiter.utility;
 
-public enum Product {
+public enum Toy {
     TEDDY_BEAR,
     STUFFED_FROG,
     HANDMADE_DOLL,

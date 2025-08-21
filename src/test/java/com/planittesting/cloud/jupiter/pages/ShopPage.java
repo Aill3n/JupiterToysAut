@@ -1,28 +1,40 @@
 package com.planittesting.cloud.jupiter.pages;
 
 import com.planittesting.cloud.jupiter.utility.ItemPrice;
-import com.planittesting.cloud.jupiter.utility.Product;
+import com.planittesting.cloud.jupiter.utility.Toy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.List;
+
 public class ShopPage extends BasePage {
 
     public ShopPage(WebDriver driver) {
-        super(driver);}
-
-    public String getExpectedPrice(Product item) {
-        String expectedPrice = String.valueOf(ItemPrice.getExpectedPrice(item));
-        return "$" + expectedPrice;
+        super(driver);
     }
 
-    public String getItemPrice(Product item) {
-        int productIndex = ItemPrice.getIndex(item);
-        By productLocator = By.id("product-"+ productIndex);
+    public String getExpectedPrice(Toy item) {
+        BigDecimal price = ItemPrice.getExpectedPrice(item);
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+        return currencyFormatter.format(price);
+    }
 
-        WebElement productItem = driver.findElement(productLocator);
-        WebElement productPrice = productItem.findElement((By.className("product-price")));
+    public String getItemPrice(Toy item) {
+        int toyIndex = ItemPrice.getIndex(item);
+        By toyLocator = By.id("product-" + toyIndex);
+        By priceLocator = By.className("product-price");
 
-        return productPrice.getText();
+        List<WebElement> productFinder = driver.findElements(toyLocator);
+        if (productFinder.isEmpty()) {
+            return "";
+        }
+
+        WebElement productElement = productFinder.getFirst();
+
+        List<WebElement> prices = productElement.findElements(priceLocator);
+        return !prices.isEmpty() ? prices.getFirst().getText() : "";
     }
 }

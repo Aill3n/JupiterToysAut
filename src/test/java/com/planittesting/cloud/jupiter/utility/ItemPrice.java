@@ -4,7 +4,7 @@ import java.util.EnumMap;
 
 public class ItemPrice{
 
-    private static EnumMap<Product, Double> ProductMap;
+    private static final EnumMap<Product, Double> ProductMap;
 
     static {
         ProductMap = new EnumMap<>(Product.class);
@@ -24,13 +24,6 @@ public class ItemPrice{
 
     public static double getExpectedPrice(Product item) {
         return ProductMap.get(item);
-    }
-    
-    public static String formatItemName(Product item){
-        return item
-                .name()
-                .toLowerCase()
-                .replace("_"," ");
     }
 
     public static int getIndex(Product item) {

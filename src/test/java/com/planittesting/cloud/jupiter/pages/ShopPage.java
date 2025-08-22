@@ -1,6 +1,6 @@
 package com.planittesting.cloud.jupiter.pages;
 
-import com.planittesting.cloud.jupiter.utility.ItemPrice;
+import com.planittesting.cloud.jupiter.utility.ToyPrice;
 import com.planittesting.cloud.jupiter.utility.Toy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -17,13 +17,13 @@ public class ShopPage extends BasePage {
     }
 
     public String getExpectedPrice(Toy item) {
-        BigDecimal price = ItemPrice.getExpectedPrice(item);
+        BigDecimal price = ToyPrice.getExpectedPrice(item);
         NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
         return currencyFormatter.format(price);
     }
 
     public String getItemPrice(Toy item) {
-        int toyIndex = ItemPrice.getIndex(item);
+        int toyIndex = ToyPrice.getIndex(item);
         By toyLocator = By.id("product-" + toyIndex);
         By priceLocator = By.className("product-price");
 

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ShopPage extends BasePage {
 
-    private final By cartCountLocator = By.className("cart-count");
+    private final By cartCounterLocator = By.className("cart-count");
     private final By buyButtonLocator = By.className("btn-success");
 
     public ShopPage(WebDriver driver) {
@@ -64,7 +64,7 @@ public class ShopPage extends BasePage {
     }
 
     public String getItemsInCart() {
-        List<WebElement> cartElements = driver.findElements(cartCountLocator);
-        return !cartElements.isEmpty() ? cartElements.getFirst().getText() : "0";
+        List<WebElement> cartElements = driver.findElements(cartCounterLocator);
+        return !cartElements.isEmpty() ? cartElements.getFirst().getText() : "";
     }
 }

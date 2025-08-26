@@ -7,12 +7,11 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ShopPageTest extends BaseTest {
 
     @Test
-    public void validateItemPrice() {
+    public void validateItemPriceTest() {
         // Step 1: From the home page go to the shop page
         ShopPage shopPage = basePage.openShopPage();
 
@@ -24,7 +23,7 @@ public class ShopPageTest extends BaseTest {
     }
 
     @Test
-    public void validateNumberOfItemsInCart(){
+    public void validateNumberOfItemsInCartTest(){
         // Step 1: From the home page go to the shop page
         ShopPage shopPage = basePage.openShopPage();
 

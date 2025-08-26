@@ -12,6 +12,9 @@ import java.util.List;
 
 public class ShopPage extends BasePage {
 
+    private final By cartCountLocator = By.className("cart-count");
+    private final By buyButtonLocator = By.className("btn-success");
+
     public ShopPage(WebDriver driver) {
         super(driver);
     }
@@ -36,5 +39,32 @@ public class ShopPage extends BasePage {
 
         List<WebElement> prices = productElement.findElements(priceLocator);
         return !prices.isEmpty() ? prices.getFirst().getText() : "";
+    }
+
+    public void addProductToCartByPrice(BigDecimal price) {
+        ToyPrice.getFirstToyByPrice(price)
+                .ifPresent(this::addToCart);
+    }
+
+    private void addToCart(Toy toy) {
+        int toyIndex = ToyPrice.getIndex(toy);
+        By toyLocator = By.id("product-" + toyIndex);
+
+        List<WebElement> products = driver.findElements(toyLocator);
+        if (products.isEmpty()) {
+            return;
+        }
+
+        WebElement productElement = products.getFirst();
+
+        List<WebElement> buyButtons = productElement.findElements(buyButtonLocator);
+        if (!buyButtons.isEmpty()) {
+            buyButtons.getFirst().click();
+        }
+    }
+
+    public String getItemsInCart() {
+        List<WebElement> cartElements = driver.findElements(cartCountLocator);
+        return !cartElements.isEmpty() ? cartElements.getFirst().getText() : "0";
     }
 }

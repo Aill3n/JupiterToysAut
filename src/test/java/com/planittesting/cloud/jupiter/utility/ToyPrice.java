@@ -2,6 +2,8 @@ package com.planittesting.cloud.jupiter.utility;
 
 import java.math.BigDecimal;
 import java.util.EnumMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class ToyPrice {
 
@@ -30,5 +32,12 @@ public class ToyPrice {
     public static int getIndex(Toy item) {
         int index = item.ordinal();
         return (index + 1);
+    }
+
+    public static Optional<Toy> getFirstToyByPrice(BigDecimal price) {
+        return TOY_MAP.entrySet().stream()
+                .filter(toy -> toy.getValue().equals(price))
+                .map(Map.Entry::getKey)
+                .findFirst();
     }
 }

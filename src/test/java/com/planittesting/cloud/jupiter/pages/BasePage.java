@@ -12,10 +12,12 @@ public class BasePage {
     protected final WebDriver driver;
     protected final WebDriverWait wait;
 
-    // Locators - Contact Page
+    // Contact Page
     private final By contactMenuLocator = By.className("icon-envelope");
-    // Locators - Login Page
+    // Login Page
     private final By loginMenuLocator = By.id("nav-login");
+    // Shop Page
+    private final By shopMenuLocator = By.id("nav-shop");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -32,5 +34,11 @@ public class BasePage {
         WebElement loginMenu = driver.findElement(loginMenuLocator);
         loginMenu.click();
         return new LoginPage(driver);
+    }
+
+    public ShopPage openShopPage() {
+        WebElement shopPage = driver.findElement(shopMenuLocator);
+        shopPage.click();
+        return new ShopPage(driver);
     }
 }

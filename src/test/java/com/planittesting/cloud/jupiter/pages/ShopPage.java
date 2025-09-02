@@ -23,7 +23,7 @@ public class ShopPage extends BasePage {
         super(driver);
     }
 
-    public List<Product> findProductAndPriceElements() {
+    public List<Product> getProducts() {
         return driver.findElements(productContainerLocator)
                 .stream()
                 .filter(element -> !element.findElements(productNameLocator).isEmpty()
@@ -33,7 +33,7 @@ public class ShopPage extends BasePage {
     }
 
     public Optional<BigDecimal> getProductPriceByName(String productName) {
-        return findProductAndPriceElements()
+        return getProducts()
                 .stream()
                 .filter(product -> product.getName().equalsIgnoreCase(productName.trim()))
                 .map(Product::getPrice)
@@ -49,7 +49,7 @@ public class ShopPage extends BasePage {
     }
 
     public Optional<Product> findFirstProductByPrice(BigDecimal price) {
-        return findProductAndPriceElements()
+        return getProducts()
                 .stream()
                 .filter(product -> product.getPrice().equals(price))
                 .findFirst();

@@ -1,69 +1,82 @@
 package com.planittesting.cloud.jupiter.pages;
 
-import com.planittesting.cloud.jupiter.utility.ToyPrice;
-import com.planittesting.cloud.jupiter.utility.Toy;
+import com.planittesting.cloud.jupiter.utility.Product;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.math.BigDecimal;
-import java.text.NumberFormat;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ShopPage extends BasePage {
 
     private final By cartCounterLocator = By.className("cart-count");
     private final By buyButtonLocator = By.className("btn-success");
+    private final By productNameLocator = By.className("product-title");
+    private final By productPriceLocator = By.className("product-price");
+    private final By productContainerLocator = By.className("product");
+
 
     public ShopPage(WebDriver driver) {
         super(driver);
     }
 
-    public String getExpectedPrice(Toy item) {
-        BigDecimal price = ToyPrice.getExpectedPrice(item);
-        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
-        return currencyFormatter.format(price);
+    public List<Product> findProductAndPriceElements() {
+        return driver.findElements(productContainerLocator)
+                .stream()
+                .filter(element -> !element.findElements(productNameLocator).isEmpty()
+                        && !element.findElements(productPriceLocator).isEmpty())
+                .map(this::instantiateProducts)
+                .collect(Collectors.toList());
     }
 
-    public String getItemPrice(Toy item) {
-        int toyIndex = ToyPrice.getIndex(item);
-        By toyLocator = By.id("product-" + toyIndex);
-        By priceLocator = By.className("product-price");
-
-        List<WebElement> productFinder = driver.findElements(toyLocator);
-        if (productFinder.isEmpty()) {
-            return "";
-        }
-
-        WebElement productElement = productFinder.getFirst();
-
-        List<WebElement> prices = productElement.findElements(priceLocator);
-        return !prices.isEmpty() ? prices.getFirst().getText() : "";
+    public Optional<BigDecimal> getProductPriceByName(String productName) {
+        return findProductAndPriceElements()
+                .stream()
+                .filter(product -> product.getName().equalsIgnoreCase(productName.trim()))
+                .map(Product::getPrice)
+                .findFirst();
     }
 
-    public void addProductToCartByPrice(BigDecimal price) {
-        ToyPrice.getFirstToyByPrice(price)
-                .ifPresent(this::addToCart);
+    public Product instantiateProducts(WebElement productElement) {
+        String productName = productElement.findElement(productNameLocator).getText();
+        String priceText = productElement.findElement(productPriceLocator).getText().substring(1);
+        BigDecimal price = new BigDecimal(priceText);
+
+        return new Product(productName, price);
     }
 
-    private void addToCart(Toy toy) {
-        int toyIndex = ToyPrice.getIndex(toy);
-        By toyLocator = By.id("product-" + toyIndex);
+    public Optional<Product> findFirstProductByPrice(BigDecimal price) {
+        return findProductAndPriceElements()
+                .stream()
+                .filter(product -> product.getPrice().equals(price))
+                .findFirst();
+    }
 
-        List<WebElement> products = driver.findElements(toyLocator);
-        if (products.isEmpty()) {
-            return;
-        }
+    public Optional<WebElement> findProductElement(Product product) {
+        return driver.findElements(productContainerLocator).stream()
+                .filter(element -> {
+                    List<WebElement> title = element.findElements(productNameLocator);
+                    return !title.isEmpty() &&
+                            title.getFirst().getText().equalsIgnoreCase(product.getName().trim());
+                }).findFirst();
+    }
 
-        WebElement productElement = products.getFirst();
-
+    public void clickBuyButton(WebElement productElement) {
         List<WebElement> buyButtons = productElement.findElements(buyButtonLocator);
         if (!buyButtons.isEmpty()) {
             buyButtons.getFirst().click();
         }
     }
 
-    public String getItemsInCart() {
+    public void addProductToCart(Product product) {
+        Optional<WebElement> productElement = findProductElement(product);
+        productElement.ifPresent(this::clickBuyButton);
+    }
+
+    public String getCartItemCount() {
         List<WebElement> cartElements = driver.findElements(cartCounterLocator);
         return !cartElements.isEmpty() ? cartElements.getFirst().getText() : "";
     }

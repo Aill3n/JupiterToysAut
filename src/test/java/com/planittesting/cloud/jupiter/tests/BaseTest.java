@@ -1,6 +1,6 @@
 package com.planittesting.cloud.jupiter.tests;
 
-import com.planittesting.cloud.jupiter.pages.BasePage;
+import com.planittesting.cloud.jupiter.model.BasePage;
 import com.planittesting.cloud.jupiter.utility.Browser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

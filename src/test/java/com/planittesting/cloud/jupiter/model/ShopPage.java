@@ -1,6 +1,5 @@
-package com.planittesting.cloud.jupiter.pages;
+package com.planittesting.cloud.jupiter.model;
 
-import com.planittesting.cloud.jupiter.utility.Product;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -44,8 +43,9 @@ public class ShopPage extends BasePage {
         String productName = productElement.findElement(productNameLocator).getText();
         String priceText = productElement.findElement(productPriceLocator).getText().substring(1);
         BigDecimal price = new BigDecimal(priceText);
+        WebElement shopButtonElement = productElement.findElement(buyButtonLocator);
 
-        return new Product(productName, price);
+        return new Product(productName, price, productElement, shopButtonElement);
     }
 
     public Optional<Product> findFirstProductByPrice(BigDecimal price) {
@@ -55,29 +55,13 @@ public class ShopPage extends BasePage {
                 .findFirst();
     }
 
-    public Optional<WebElement> findProductElement(Product product) {
-        return driver.findElements(productContainerLocator).stream()
-                .filter(element -> {
-                    List<WebElement> title = element.findElements(productNameLocator);
-                    return !title.isEmpty() &&
-                            title.getFirst().getText().equalsIgnoreCase(product.getName().trim());
-                }).findFirst();
+    public void clickBuyButton(Product product) {
+        WebElement buyButton = product.getShopButtonElement();
+        buyButton.click();
     }
 
-    public void clickBuyButton(WebElement productElement) {
-        List<WebElement> buyButtons = productElement.findElements(buyButtonLocator);
-        if (!buyButtons.isEmpty()) {
-            buyButtons.getFirst().click();
-        }
-    }
-
-    public void addProductToCart(Product product) {
-        Optional<WebElement> productElement = findProductElement(product);
-        productElement.ifPresent(this::clickBuyButton);
-    }
-
-    public String getCartItemCount() {
+    public Integer getCartItemCount() {
         List<WebElement> cartElements = driver.findElements(cartCounterLocator);
-        return !cartElements.isEmpty() ? cartElements.getFirst().getText() : "";
+        return !cartElements.isEmpty() ? Integer.parseInt(cartElements.getFirst().getText()) : 0;
     }
 }

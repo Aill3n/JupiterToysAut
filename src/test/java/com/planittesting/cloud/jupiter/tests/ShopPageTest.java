@@ -1,7 +1,7 @@
 package com.planittesting.cloud.jupiter.tests;
 
-import com.planittesting.cloud.jupiter.pages.ShopPage;
-import com.planittesting.cloud.jupiter.utility.Product;
+import com.planittesting.cloud.jupiter.model.ShopPage;
+import com.planittesting.cloud.jupiter.model.Product;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -34,12 +34,12 @@ public class ShopPageTest extends BaseTest {
         // Smiley Bear $14.99
         BigDecimal price = new BigDecimal("14.99");
         Optional<Product> product = shopPage.findFirstProductByPrice(price);
-        assertTrue(product.isPresent(), "Validating the price provided matches the price of the first element found.");
+        assertTrue(product.isPresent(), "Validating the price provided matches an existing product.");
 
-        shopPage.addProductToCart(product.get());
+        shopPage.clickBuyButton(product.get());
 
         // Step 3: Validate that the cart menu displays 1
-        String actualQuantityInCart = shopPage.getCartItemCount();
-        assertEquals("1",actualQuantityInCart, "Validating the Cart contains one item.");
+        Integer actualQuantityInCart = shopPage.getCartItemCount();
+        assertEquals(1,actualQuantityInCart, "Validating the Cart contains one item.");
     }
 }

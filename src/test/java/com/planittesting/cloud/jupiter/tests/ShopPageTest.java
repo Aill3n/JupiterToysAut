@@ -18,7 +18,7 @@ public class ShopPageTest extends BaseTest {
         ShopPage shopPage = basePage.openShopPage();
 
         // Step 2: Validate a given price for a given product title. For example given Teddy Bear validate that the price is 12.99
-        BigDecimal expectedValue = new BigDecimal("9.99");
+        BigDecimal expectedValue = new BigDecimal("8.99");
         Optional<BigDecimal> actualValue = shopPage.getProductPriceByName("Fluffy Bunny");
 
         assertTrue(actualValue.isPresent(),"Confirming product 'Fluffy Bunny' is present in the shop page.");
@@ -31,10 +31,10 @@ public class ShopPageTest extends BaseTest {
         ShopPage shopPage = basePage.openShopPage();
 
         // Step 2: Buy the first product you find with a given price.
-        // Smiley Bear $14.99
-        BigDecimal price = new BigDecimal("14.99");
+        // Smiley Bear $13.99
+        BigDecimal price = new BigDecimal("13.99");
         Optional<Product> product = shopPage.findFirstProductByPrice(price);
-        assertTrue(product.isPresent(), "Validating product with price $14.99 is on the shop page");
+        assertTrue(product.isPresent(), "Validating product with price $13.99 is on the shop page");
 
         product.get().clickBuyButton();
 

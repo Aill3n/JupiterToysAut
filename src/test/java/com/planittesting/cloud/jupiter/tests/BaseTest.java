@@ -11,7 +11,8 @@ import java.time.Duration;
 public class BaseTest {
 
     protected WebDriver driver;
-    protected String baseUrl = "https://jupiter.cloud.planittesting.com/#/home";
+    //Jupiter original: https://jupiter.cloud.planittesting.com/#/home
+    protected String baseUrl = "http://jupiter2.cloud.planittesting.com/";
     protected BasePage basePage;
 
     @BeforeEach

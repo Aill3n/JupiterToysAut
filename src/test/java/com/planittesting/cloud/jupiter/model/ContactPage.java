@@ -10,7 +10,7 @@ import java.util.List;
 public class ContactPage extends BasePage {
 
     // Buttons
-    private final By submitButtonLocator = By.className("btn-contact");
+    private final By submitButtonLocator = By.className("btn-primary");
 
     // Form Fields
     private final By forenameFieldLocator = By.id("forename");

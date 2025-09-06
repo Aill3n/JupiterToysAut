@@ -34,12 +34,12 @@ public class ShopPageTest extends BaseTest {
         // Smiley Bear $14.99
         BigDecimal price = new BigDecimal("14.99");
         Optional<Product> product = shopPage.findFirstProductByPrice(price);
-        assertTrue(product.isPresent(), "Validating the price provided matches an existing product.");
+        assertTrue(product.isPresent(), "Validating product with price $14.99 is on the shop page");
 
         product.get().clickBuyButton();
 
         // Step 3: Validate that the cart menu displays 1
         Integer actualQuantityInCart = shopPage.getCartItemCount();
-        assertEquals(1,actualQuantityInCart, "Validating the Cart contains one item.");
+        assertEquals(1,actualQuantityInCart, "Validating the cart contains 1 item after adding a product.");
     }
 }

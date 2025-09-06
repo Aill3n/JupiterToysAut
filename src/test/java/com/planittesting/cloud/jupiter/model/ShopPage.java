@@ -45,7 +45,7 @@ public class ShopPage extends BasePage {
         BigDecimal price = new BigDecimal(priceText);
         WebElement shopButtonElement = productElement.findElement(buyButtonLocator);
 
-        return new Product(productName, price, productElement, shopButtonElement);
+        return new Product(productName, price, shopButtonElement);
     }
 
     public Optional<Product> findFirstProductByPrice(BigDecimal price) {
@@ -53,11 +53,6 @@ public class ShopPage extends BasePage {
                 .stream()
                 .filter(product -> product.getPrice().equals(price))
                 .findFirst();
-    }
-
-    public void clickBuyButton(Product product) {
-        WebElement buyButton = product.getShopButtonElement();
-        buyButton.click();
     }
 
     public Integer getCartItemCount() {

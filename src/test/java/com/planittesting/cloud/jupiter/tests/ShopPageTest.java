@@ -21,8 +21,8 @@ public class ShopPageTest extends BaseTest {
         BigDecimal expectedValue = new BigDecimal("9.99");
         Optional<BigDecimal> actualValue = shopPage.getProductPriceByName("Fluffy Bunny");
 
-        assertTrue(actualValue.isPresent());
-        assertEquals(expectedValue, actualValue.get(), "Validating price found for product: ");
+        assertTrue(actualValue.isPresent(),"Confirming product 'Fluffy Bunny' is present in the shop page.");
+        assertEquals(expectedValue, actualValue.get(),"Validating the price " + expectedValue + " for Fluffy Bunny is correct.");
     }
 
     @Test
@@ -36,7 +36,7 @@ public class ShopPageTest extends BaseTest {
         Optional<Product> product = shopPage.findFirstProductByPrice(price);
         assertTrue(product.isPresent(), "Validating the price provided matches an existing product.");
 
-        shopPage.clickBuyButton(product.get());
+        product.get().clickBuyButton();
 
         // Step 3: Validate that the cart menu displays 1
         Integer actualQuantityInCart = shopPage.getCartItemCount();

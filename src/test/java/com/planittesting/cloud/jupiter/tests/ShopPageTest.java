@@ -17,9 +17,9 @@ public class ShopPageTest extends BaseTest {
 
         // Step 2: Validate a given price for a given product title. For example given Teddy Bear validate that the price is 12.99
         BigDecimal price = new BigDecimal("9.99");
-        Product fluffyBunny = shopPage.getProductByPrice(price);
-        assertEquals("Fluffy Bunny", fluffyBunny.getName(), "Name match.");
-        assertEquals(price, fluffyBunny.getPrice(), "Product price.");
+        Product product = shopPage.getProductByPrice(price);
+        assertEquals("Fluffy Bunny", product.getName(), "Name match.");
+        assertEquals(price, product.getPrice(), "Product price.");
     }
 
     @Test

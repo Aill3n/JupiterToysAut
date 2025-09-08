@@ -17,9 +17,9 @@ public class ShopPageTest extends BaseTest {
 
         // Step 2: Validate a given price for a given product title. For example given Teddy Bear validate that the price is 12.99
         BigDecimal price = new BigDecimal("9.99");
-        Product product = shopPage.getProductByPrice(price);
-        assertEquals("Fluffy Bunny", product.getName(), "Name match.");
-        assertEquals(price, product.getPrice(), "Product price.");
+        Product fluffyBunny = shopPage.getProductByPrice(price);
+        assertEquals("Fluffy Bunny", fluffyBunny.getName(), "Name match.");
+        assertEquals(price, fluffyBunny.getPrice(), "Product price.");
     }
 
     @Test
@@ -29,11 +29,13 @@ public class ShopPageTest extends BaseTest {
 
         // Step 2: Buy the first product you find with a given price.
         // Smiley Bear $14.99
+        Integer currentCartCount = shopPage.getCartItemCount();
+
         Product smileyBear = shopPage.getProductByPrice(new BigDecimal("14.99"));
         smileyBear.clickBuyButton();
 
         // Step 3: Validate that the cart menu displays 1
         Integer actualQuantityInCart = shopPage.getCartItemCount();
-        assertEquals(1, actualQuantityInCart, "Cart count.");
+        assertEquals(currentCartCount + 1, actualQuantityInCart, "Cart count.");
     }
 }

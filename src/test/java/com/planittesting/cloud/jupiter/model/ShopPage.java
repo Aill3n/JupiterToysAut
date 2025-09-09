@@ -16,6 +16,8 @@ public class ShopPage extends BasePage {
     private final By productNameLocator = By.className("product-title");
     private final By productPriceLocator = By.className("product-price");
     private final By productContainerLocator = By.className("product");
+    private final By ratingLocator = By.className("rating");
+
 
 
     public ShopPage(WebDriver driver) {
@@ -36,8 +38,9 @@ public class ShopPage extends BasePage {
         String priceText = productElement.findElement(productPriceLocator).getText().substring(1);
         BigDecimal price = new BigDecimal(priceText);
         WebElement shopButtonElement = productElement.findElement(buyButtonLocator);
+        WebElement ratingElement = productElement.findElement(ratingLocator);
 
-        return new Product(productName, price, shopButtonElement);
+        return new Product(productName, price, shopButtonElement, ratingElement);
     }
 
     public Product filterProduct(Predicate<Product> filter) {

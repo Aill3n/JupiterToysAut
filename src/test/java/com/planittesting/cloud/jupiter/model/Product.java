@@ -9,12 +9,13 @@ public class Product {
     String name;
     BigDecimal price;
     WebElement shopButtonElement;
+    WebElement starsRatingElement;
 
-
-    public Product(String name, BigDecimal price, WebElement shopButtonElement) {
+    public Product(String name, BigDecimal price, WebElement shopButtonElement, WebElement starsRatingElement) {
         this.name = name;
         this.price = price;
         this.shopButtonElement = shopButtonElement;
+        this.starsRatingElement = starsRatingElement;
     }
 
     public WebElement getShopButtonElement() {
@@ -27,6 +28,10 @@ public class Product {
 
     public BigDecimal getPrice() {
         return price;
+    }
+
+    public WebElement getStarsRatingElement() {
+        return starsRatingElement;
     }
 
     public void clickBuyButton() {

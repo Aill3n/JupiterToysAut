@@ -49,14 +49,9 @@ public class ShopPageTest extends BaseTest {
         Integer initialCartCount = shopPage.getCartItemCount();
 
         // Step 2: Buy a product with 5 stars
-        Integer expectedRating = 5;
-        Product product = shopPage.filterProduct(p -> p.getStarsRatingElement().getText().equals(expectedRating.toString()));
-        assertNotNull(product, "No product found with " + expectedRating + " stars");
+        Product product = shopPage.filterProduct(p -> p.getStarsRatingElement().getText().equals(Integer.toString(5)));
 
         product.clickBuyButton();
-
-        Integer actualRating = Integer.valueOf(product.getStarsRatingElement().getText());
-        assertEquals(expectedRating, actualRating, "5 stars product: " + product.getName());
 
         // Step 3: Validate that the cart menu displays 1
         Integer actualQuantityInCart = shopPage.getCartItemCount();

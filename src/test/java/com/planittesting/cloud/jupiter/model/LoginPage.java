@@ -21,6 +21,7 @@ public class LoginPage extends BasePage {
     private final By logoutMenuLocator = By.id("nav-logout");
     private final By logoutButtonLocator = By.className("btn-success");
     private final By modalFooterLocator = By.className("modal-footer");
+    private final By agreeCheckboxLocator = By.id("agree");
 
     public void populateLoginParameters(String userName, String password) {
         WebElement userNameField = driver.findElement(userNameLoginLocator);
@@ -57,5 +58,10 @@ public class LoginPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(logoutButton));
         logoutButton.click();
         wait.until(ExpectedConditions.invisibilityOfElementLocated(logoutMenuLocator));
+    }
+
+    public void agreeToTerms() {
+        WebElement agreeCheckbox = driver.findElement(agreeCheckboxLocator);
+        agreeCheckbox.click();
     }
 }

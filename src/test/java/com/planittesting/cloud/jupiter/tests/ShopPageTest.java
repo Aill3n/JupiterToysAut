@@ -20,7 +20,7 @@ public class ShopPageTest extends BaseTest {
         Product product = shopPage.filterProduct(p -> p.getName().equals(fluffyBunny));
 
         assertEquals(fluffyBunny, product.getName(), "Name match.");
-        assertEquals(new BigDecimal("9.99"), product.getPrice(), "Product price.");
+        assertEquals(new BigDecimal("8.99"), product.getPrice(), "Product price.");
     }
 
     @Test
@@ -29,9 +29,9 @@ public class ShopPageTest extends BaseTest {
         ShopPage shopPage = basePage.openShopPage();
 
         // Step 2: Buy the first product you find with a given price.
-        // Smiley Bear $14.99
+        // Smiley Bear $13.99
         Integer initialCartCount = shopPage.getCartItemCount();
-        Product product = shopPage.filterProduct(p -> p.getPrice().equals(new BigDecimal("14.99")));
+        Product product = shopPage.filterProduct(p -> p.getPrice().equals(new BigDecimal("13.99")));
 
         product.clickBuyButton();
 

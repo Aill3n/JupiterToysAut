@@ -10,7 +10,7 @@ import java.util.List;
 public class ContactPage extends BasePage {
 
     // Buttons
-    private final By submitButtonLocator = By.className("btn-contact");
+    private final By submitButtonLocator = By.className("btn-primary");
 
     // Form Fields
     private final By forenameFieldLocator = By.id("forename");
@@ -42,8 +42,10 @@ public class ContactPage extends BasePage {
     }
 
     public void submitForm() {
-        WebElement submitButton = driver.findElement(submitButtonLocator);
-        submitButton.click();
+        List<WebElement> elements = driver.findElements(submitButtonLocator);
+        if (!elements.isEmpty()) {
+            elements.getFirst().click();
+        }
     }
 
     public void enterForename(String forename) {

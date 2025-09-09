@@ -20,7 +20,9 @@ public class LoginPageTest extends BaseTest {
         loginPage.populateLoginParameters(USERNAME, PASSWORD);
 
         // Step 3: Click the Login button
+        loginPage.agreeToTerms();
         loginPage.submitLoginForm();
+
 
         // Step 4: Verify that the username appears in the menu bar
         String actualUser = loginPage.getUsernameLoggedIn();
@@ -37,6 +39,7 @@ public class LoginPageTest extends BaseTest {
 
         // Step 3: In the login dialog enter username as anyvaluewilldo and password as letmein
         loginPage.populateLoginParameters(USERNAME, PASSWORD);
+        loginPage.agreeToTerms();
         loginPage.submitLoginForm();
         String actualUser = loginPage.getUsernameLoggedIn();
         assertEquals(USERNAME, actualUser, "Validating expected user name");

@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class ShopPage extends BasePage {
@@ -31,14 +31,6 @@ public class ShopPage extends BasePage {
                 .collect(Collectors.toList());
     }
 
-    public Optional<BigDecimal> getProductPriceByName(String productName) {
-        return getProducts()
-                .stream()
-                .filter(product -> product.getName().equalsIgnoreCase(productName.trim()))
-                .map(Product::getPrice)
-                .findFirst();
-    }
-
     public Product instantiateProducts(WebElement productElement) {
         String productName = productElement.findElement(productNameLocator).getText();
         String priceText = productElement.findElement(productPriceLocator).getText().substring(1);
@@ -48,11 +40,12 @@ public class ShopPage extends BasePage {
         return new Product(productName, price, shopButtonElement);
     }
 
-    public Optional<Product> findFirstProductByPrice(BigDecimal price) {
+    public Product filterProduct(Predicate<Product> filter) {
         return getProducts()
                 .stream()
-                .filter(product -> product.getPrice().equals(price))
-                .findFirst();
+                .filter(filter)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Product not found."));
     }
 
     public Integer getCartItemCount() {

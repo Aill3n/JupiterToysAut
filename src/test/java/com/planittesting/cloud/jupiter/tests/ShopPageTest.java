@@ -42,7 +42,7 @@ public class ShopPageTest extends BaseTest {
     }
 
     @Test
-    public void validate5StarsRatingTest() {
+    public void validateFiveStarProductAddedToCartTest() {
         // Step 1: From the home page go to the shop page
         ShopPage shopPage = basePage.openShopPage();
         Integer initialCartCount = shopPage.getCartItemCount();

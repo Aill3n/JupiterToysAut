@@ -42,8 +42,10 @@ public class ContactPage extends BasePage {
     }
 
     public void submitForm() {
-        WebElement submitButton = driver.findElement(submitButtonLocator);
-        submitButton.click();
+        List<WebElement> elements = driver.findElements(submitButtonLocator);
+        if (!elements.isEmpty()) {
+            elements.getFirst().click();
+        }
     }
 
     public void enterForename(String forename) {

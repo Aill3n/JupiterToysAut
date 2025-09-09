@@ -1,6 +1,6 @@
 package com.planittesting.cloud.jupiter.tests;
 
-import com.planittesting.cloud.jupiter.pages.LoginPage;
+import com.planittesting.cloud.jupiter.model.LoginPage;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

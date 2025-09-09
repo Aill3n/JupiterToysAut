@@ -1,6 +1,6 @@
 package com.planittesting.cloud.jupiter.tests;
 
-import com.planittesting.cloud.jupiter.pages.ContactPage;
+import com.planittesting.cloud.jupiter.model.ContactPage;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,4 +1,4 @@
-package com.planittesting.cloud.jupiter.pages;
+package com.planittesting.cloud.jupiter.model;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

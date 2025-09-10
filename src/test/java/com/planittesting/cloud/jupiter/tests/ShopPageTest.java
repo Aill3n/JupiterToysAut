@@ -38,5 +38,22 @@ public class ShopPageTest extends BaseTest {
         // Step 3: Validate that the cart menu displays 1
         Integer actualQuantityInCart = shopPage.getCartItemCount();
         assertEquals(initialCartCount + 1, actualQuantityInCart, "Cart count.");
+
+    }
+
+    @Test
+    public void validateFiveStarProductAddedToCartTest() {
+        // Step 1: From the home page go to the shop page
+        ShopPage shopPage = basePage.openShopPage();
+        Integer initialCartCount = shopPage.getCartItemCount();
+
+        // Step 2: Buy a product with 5 stars
+        Product product = shopPage.filterProduct(p -> p.getStarsRatingElement().getText().equals(Integer.toString(5)));
+
+        product.clickBuyButton();
+
+        // Step 3: Validate that the cart menu displays 1
+        Integer actualQuantityInCart = shopPage.getCartItemCount();
+        assertEquals(initialCartCount + 1, actualQuantityInCart, "Cart count.");
     }
 }

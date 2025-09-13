@@ -3,6 +3,8 @@ package com.planittesting.cloud.jupiter.model;
 import org.openqa.selenium.WebElement;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class Product {
 
@@ -34,7 +36,10 @@ public class Product {
         return starsRatingElement;
     }
 
-    public void clickBuyButton() {
-        this.getShopButtonElement().click();
+    public void clickBuyButton(int quantity) {
+        //TODO: Aillen to improve this?
+        for (int i = 0; i < quantity; i++) {
+            this.getShopButtonElement().click();
+        }
     }
 }

@@ -16,9 +16,9 @@ public class CartPage extends BasePage {
         super(driver);
     }
 
-    private final By totalLocator = By.className("total"); // returns only total
-    private final By quantityValueLocator = By.name("quantity"); // search for value within quantity
-    private final By cartItemLocator = By.className("cart-item");//
+    private final By totalLocator = By.className("total");
+    private final By quantityValueLocator = By.name("quantity");
+    private final By cartItemLocator = By.className("cart-item");
     private final By nameLocator = By.cssSelector("tr.cart-item.ng-scope > td.ng-binding:nth-child(2)");
     private final By priceLocator = By.cssSelector("tr.cart-item.ng-scope > td.ng-binding:nth-child(3)");
     private final By subTotalLocator = By.cssSelector("tr.cart-item.ng-scope > td.ng-binding:nth-child(4)");

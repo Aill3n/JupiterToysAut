@@ -37,7 +37,6 @@ public class Product {
     }
 
     public void clickBuyButton(int quantity) {
-        //TODO: Aillen to improve this?
         for (int i = 0; i < quantity; i++) {
             this.getShopButtonElement().click();
         }

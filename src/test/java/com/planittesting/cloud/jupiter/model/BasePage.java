@@ -19,6 +19,8 @@ public class BasePage {
     // Shop Page
     private final By shopMenuLocator = By.id("nav-shop");
 
+    private final By cartMenuLocator = By.id("nav-cart");
+
     public BasePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -40,5 +42,11 @@ public class BasePage {
         WebElement shopPage = driver.findElement(shopMenuLocator);
         shopPage.click();
         return new ShopPage(driver);
+    }
+
+    public CartPage openCartPage() {
+        WebElement cartPage = driver.findElement(cartMenuLocator);
+        cartPage.click();
+        return new CartPage(driver);
     }
 }

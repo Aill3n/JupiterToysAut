@@ -33,7 +33,7 @@ public class ShopPageTest extends BaseTest {
         Integer initialCartCount = shopPage.getCartItemCount();
         Product product = shopPage.filterProduct(p -> p.getPrice().equals(new BigDecimal("13.99")));
 
-        product.clickBuyButton();
+        product.clickBuyButton(1);
 
         // Step 3: Validate that the cart menu displays 1
         Integer actualQuantityInCart = shopPage.getCartItemCount();
@@ -50,7 +50,7 @@ public class ShopPageTest extends BaseTest {
         // Step 2: Buy a product with 5 stars
         Product product = shopPage.filterProduct(p -> p.getStarsRatingElement().getText().equals(Integer.toString(5)));
 
-        product.clickBuyButton();
+        product.clickBuyButton(1);
 
         // Step 3: Validate that the cart menu displays 1
         Integer actualQuantityInCart = shopPage.getCartItemCount();
